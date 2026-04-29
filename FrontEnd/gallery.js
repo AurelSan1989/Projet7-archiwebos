@@ -1,8 +1,8 @@
 fetch('http://localhost:5678/api/works')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         displayWorks(data);
+        setupFilter(data);
     })
     .catch(error => {console.error('Erreur Fetch:', error);
     });
@@ -26,4 +26,35 @@ function displayWorks(data) {
 
         gallery.appendChild(baliseFigure);
     }
+}
+
+function setupFilter (data) {
+
+    const filtersButtons = document.querySelectorAll('.filter-btn');
+    console.log(filtersButtons);
+
+    filtersButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.getAttribute('data-category');
+            console.log('Catégorie cliquée', category); 
+            
+            // Ici vous appellerez la fonction pour filtrer les travaux :
+            filterWorks(category, data);
+
+            // Gestion classe active
+            filtersButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active')
+        })
+    })
+}
+function filterWorks(category, data) {
+    let filteredWorks; // On crée une variable pour stocker la liste des travaux filtrés, sans lui assigner de valeur.
+
+    if(category === 'all') { //Si data-category = all (tous les travaux)
+        filteredWorks = data; // filteredWorks contient toutes les données (data)
+    } else { // Sinon, on doit faire un vrai filtrage selon la catégorie choisie
+        filteredWorks = data.filter(work => work.categoryId.toString() === category);
+    }
+
+    displayWorks(filteredWorks);
 }
