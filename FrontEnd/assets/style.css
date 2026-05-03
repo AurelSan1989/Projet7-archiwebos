@@ -211,3 +211,57 @@ footer nav ul {
 	margin: 2em
 }
 
+/* CSS pour la page de login */
+
+#login {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-form {
+    margin-top: 25px;
+    width: 380px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group input {
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.connect-btn {
+    font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 0 auto 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+.form-footer {
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
+    color: #3D3D3D;
+}
