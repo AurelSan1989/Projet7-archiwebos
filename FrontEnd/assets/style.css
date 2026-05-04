@@ -265,3 +265,23 @@ footer nav ul {
     text-decoration: underline;
     color: #3D3D3D;
 }
+
+.error-message {
+	color: red;
+	margin-top: 25px ;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Nouveau style lorsque l'utilisateur est connnecté */
+
+#portfolio .hidden {
+	display: none;
+}
+
+.portfolio-header {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	gap: 25px;
+}

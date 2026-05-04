@@ -9,8 +9,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 	<script src="gallery.js" defer></script>
 	<script src="login.js" defer></script>
+	<script src="app.js" defer></script>
 </head>
 <body>
 <header>
@@ -37,7 +39,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="portfolio-header">
+			<h2>Mes Projets</h2>
+			<div id="modifyBtn" class="hidden">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<span>Modifier</span>
+			</div>
+		</div>
 		<div class="filters">
 			<button type="button" class="filter-btn btn-all" data-category="all">Tous</button>
 			<button type="button" class="filter-btn btn-objects" data-category="1">Objets</button>

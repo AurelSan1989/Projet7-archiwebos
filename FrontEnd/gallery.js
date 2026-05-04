@@ -31,12 +31,10 @@ function displayWorks(data) {
 function setupFilter (data) {
 
     const filtersButtons = document.querySelectorAll('.filter-btn');
-    console.log(filtersButtons);
 
     filtersButtons.forEach(button => {
         button.addEventListener('click', () => {
             const category = button.getAttribute('data-category');
-            console.log('Catégorie cliquée', category); 
             
             // Ici vous appellerez la fonction pour filtrer les travaux :
             filterWorks(category, data);
