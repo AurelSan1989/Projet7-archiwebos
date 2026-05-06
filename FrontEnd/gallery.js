@@ -1,17 +1,21 @@
-fetch('http://localhost:5678/api/works')
+function getWorks() {
+    fetch('http://localhost:5678/api/works')
     .then(response => response.json())
-    .then(data => {
-        displayWorks(data);
-        setupFilter(data);
+    .then(allWorks => {
+        displayWorks(allWorks);
+        setupFilter(allWorks);
+        setupFilterEventListeners(allWorks);
     })
     .catch(error => {console.error('Erreur Fetch:', error);
     });
+}
 
-function displayWorks(data) {
+
+function displayWorks(allWorks) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = "";
-    for(let i = 0; i < data.length; i++) {
-        const work = data[i];
+    for(let i = 0; i < allWorks.length; i++) {
+        const work = allWorks[i];
 
         const baliseFigure = document.createElement('figure');
         const baliseImg = document.createElement('img');
@@ -28,31 +32,68 @@ function displayWorks(data) {
     }
 }
 
-function setupFilter (data) {
+function setupFilter() {
+    fetch("http://localhost:5678/api/categories")
+    .then(response => response.json())
+    .then(categoryWorks => {
+        console.log(categoryWorks);
+        createFiltersButtons(categoryWorks); //On appelle la fonction pour créer les boutons filtres
+    }); 
+}
 
-    const filtersButtons = document.querySelectorAll('.filter-btn');
+function createFiltersButtons(categoryWorks) {
+    const filtersDiv = document.querySelector('.filters'); //On sélectionne la div contenant les boutons filtres
+    filtersDiv.innerHTML = ''; //On la vide de son contenu (tant que je n'ai pas supprimé le HTML)
 
-    filtersButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const category = button.getAttribute('data-category');
-            
-            // Ici vous appellerez la fonction pour filtrer les travaux :
-            filterWorks(category, data);
+    //On crée un bouton "tous", et on lui assigne l'id "all" et les classes pour le CSS
+    const allBtn = document.createElement('button');
+    allBtn.innerText = "Tous"
+    allBtn.id = "all";
+    allBtn.classList.add('filter-btn');
+    allBtn.classList.add('active');
 
-            // Gestion classe active
-            filtersButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active')
-        })
+    filtersDiv.appendChild(allBtn);
+
+    //Création d'un bouton par catégorie
+    categoryWorks.forEach(category => {
+        const categoryBtn = document.createElement('button');
+        categoryBtn.textContent = category.name;
+        categoryBtn.id = category.id;
+        categoryBtn.classList.add('filter-btn');
+        categoryBtn.classList.add(`btn-cate-${category.id}`);
+
+        filtersDiv.appendChild(categoryBtn);
     })
 }
-function filterWorks(category, data) {
-    let filteredWorks; // On crée une variable pour stocker la liste des travaux filtrés, sans lui assigner de valeur.
 
-    if(category === 'all') { //Si data-category = all (tous les travaux)
-        filteredWorks = data; // filteredWorks contient toutes les données (data)
-    } else { // Sinon, on doit faire un vrai filtrage selon la catégorie choisie
-        filteredWorks = data.filter(work => work.categoryId.toString() === category);
-    }
+function setupFilterEventListeners(allWorks) {
+    const filtersDiv = document.querySelector('.filters');
 
-    displayWorks(filteredWorks);
+    filtersDiv.addEventListener('click', (event) => {
+        const clicked = event.target;
+
+        if (clicked.classList.contains('filter-btn')) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            clicked.classList.add('active');
+
+            let categoryId = clicked.id;
+
+            filterWorks(categoryId, allWorks)
+        }
+    })
 }
+
+function filterWorks(categoryId, allWorks) {
+     let filteredWorks; // On crée une variable pour stocker la liste des travaux filtrés, sans lui assigner de valeur.
+
+     if(categoryId === 'all') { //Si categoryId = all (tous les travaux)
+         filteredWorks = allWorks; // filteredWorks contient toutes les données (data)
+     } else { // Sinon, on doit faire un vrai filtrage selon la catégorie choisie
+         filteredWorks = allWorks.filter(work => work.categoryId.toString() === categoryId);
+     }
+     displayWorks(filteredWorks);
+}
+
+getWorks();
