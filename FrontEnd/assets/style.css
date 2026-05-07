@@ -211,6 +211,13 @@ footer nav ul {
 	margin: 2em
 }
 
+/* CSS pour la page index */
+
+a#logIn {
+	text-decoration: none;
+	color: inherit;
+}
+
 /* CSS pour la page de login */
 
 #login {
