@@ -6,6 +6,7 @@ function checkUserLogin() {
     console.log(filterDiv);    
     const modifyBtn = document.getElementById('modifyBtn');
     console.log(modifyBtn);
+    const editionBanner = document.querySelector('.edition-banner');
     
 
     //On vérifie la présence du token 
@@ -24,6 +25,9 @@ function checkUserLogin() {
         }
         if (filterDiv) {
             filterDiv.classList.add('hidden');
+        }
+        if (editionBanner) {
+            editionBanner.classList.remove('hidden')
         }
     } else {
         console.log("Aucun utilisateur connecté");

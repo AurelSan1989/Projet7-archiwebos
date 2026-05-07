@@ -1,5 +1,3 @@
-// 
-
 const formElement = document.querySelector('.login-form');
 const emailInput = document.getElementById('email');
 const passWordInput = document.getElementById('password');
