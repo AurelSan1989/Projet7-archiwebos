@@ -6,13 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 	<script src="gallery.js" defer></script>
-	<script src="login.js" defer></script>
 	<script src="app.js" defer></script>
+	<script src="modal.js" defer></script>
 </head>
 <body>
 	<div class="edition-banner hidden">
@@ -30,6 +29,7 @@
 		</ul>
 	</nav>
 </header>
+
 <main>
 	<section id="introduction">
 		<figure>
@@ -45,7 +45,8 @@
 	<section id="portfolio">
 		<div class="portfolio-header">
 			<h2>Mes Projets</h2>
-			<div id="modifyBtn" class="hidden">
+			<!-- Ici, l'élément cliquable pour modifier le contenu lorsque l'utilisateur est connecté -->
+			<div id="modifyBtn" class="hidden modifyBtn">
 				<i class="fa-regular fa-pen-to-square"></i>
 				<span>Modifier</span>
 			</div>
@@ -122,5 +123,46 @@
 		</ul>
 	</nav>
 </footer>
+
+<aside class="modal hidden" id="js-modal">
+	<div class="modal-box" id="js-modal-box">
+		<button class="modal-btn_close" id="js-btn_close"><i class="fa-solid fa-xmark"></i></button>
+		<button class="modal-btn_back hidden" id="js-btn_back"><i class="fa-solid fa-arrow-left"></i></button>
+		<div class="modal-content_del" id="modal-content_del">
+			<h2 class="modal-title">Galerie photo</h2>
+			<div class="modal-works" id="js-modal_works">
+				<!-- Toutes les balises <figure> seront générées par le JavaScript -->
+
+			</div>
+			<hr class="modal-content_divider">
+			<button class="modal-cta_btn" id="modal-cta_btn">Ajouter une photo</button>
+		</div>
+		<div class="modal-content_add hidden" id="modal-content_add">
+			<h2 class="modal-title">Ajout photo</h2>
+			<form class="modal-add_form">
+				<label for="picture" class="label-picture">
+					<img src="" alt="Nouvelle image" class="inputImg hidden" id="newImg">
+					<i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;"></i>
+					<span class="fake-btn">+ Ajouter photo</span>
+					<span class="label-picture_info">jpg, png : 4mo max</span>
+				</label>
+				<input type="file" name="picture" id="picture" class="input-picture">
+				<fieldset class="form-column">
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="title">
+				</fieldset>
+				<fieldset class="form-column">
+					<label for="category">Catégorie</label>
+					<select name="category" id="category">
+						<!-- Appel API pour afficher les catégories -->
+					</select>
+				</fieldset>
+				<hr class="modal-content_divider">
+				<button class="modal-cta_btn modal-add_btn" id="modal-add_btn">Valider</button>
+			</form>
+			<p class="error-message hidden">Veillez à remplir tous les champs</p>
+		</div>
+	</div>
+</aside>
 </body>
 </html>

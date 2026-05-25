@@ -3,15 +3,12 @@ function checkUserLogin() {
 
     const logInBtn = document.getElementById('logIn');
     const filterDiv = document.querySelector('#portfolio .filters');
-    console.log(filterDiv);    
     const modifyBtn = document.getElementById('modifyBtn');
-    console.log(modifyBtn);
     const editionBanner = document.querySelector('.edition-banner');
     
 
     //On vérifie la présence du token 
-    if (token) {
-        console.log("Utilisateur connecté");
+    if (token) { //Si le token n'est pas nul, l'utilisateur est connecté
         // On change le contenu textuel de l'élément "login"
         logInBtn.textContent = "Logout";
         logInBtn.onclick = function(event) {
@@ -29,8 +26,7 @@ function checkUserLogin() {
         if (editionBanner) {
             editionBanner.classList.remove('hidden')
         }
-    } else {
-        console.log("Aucun utilisateur connecté");
+    } else { // Sinon, l'utilisateur est deconnecté
         logInBtn.textContent = "Login";
 
         if (modifyBtn) {

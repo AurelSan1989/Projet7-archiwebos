@@ -29,8 +29,6 @@ formElement.addEventListener('submit', function(event) {
         return response.json();
     })
     .then (result => {
-        console.log("Réponse de l'API :", result);
-        console.log(result.token);
         // On stocke le token d'utilisateur dans le localStorage afin de garder la session ouverte
         localStorage.setItem('token', result.token);
         //On redirige l'utilisateur vers la page d'accueil
@@ -43,6 +41,7 @@ formElement.addEventListener('submit', function(event) {
         let errorMessage = document.createElement('p');
         errorMessage.classList.add('error-message');
         errorMessage.innerText = error.message;
-        logInSection.appendChild(errorMessage)
+        const logInSection = document.getElementById('login');
+        logInSection.appendChild(errorMessage);
     })
 })

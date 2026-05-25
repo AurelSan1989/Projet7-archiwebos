@@ -21,6 +21,7 @@ function displayWorks(allWorks) {
         const baliseImg = document.createElement('img');
         const baliseFigcaption = document.createElement('figcaption');
 
+        baliseFigure.id = `work-${work.id}`;
         baliseImg.src = work.imageUrl;
         baliseImg.alt = work.title;
         baliseFigcaption.textContent = work.title;
@@ -36,8 +37,7 @@ function setupFilter() {
     fetch("http://localhost:5678/api/categories")
     .then(response => response.json())
     .then(categoryWorks => {
-        console.log(categoryWorks);
-        createFiltersButtons(categoryWorks); //On appelle la fonction pour créer les boutons filtres
+        createFiltersButtons(categoryWorks); 
     }); 
 }
 
